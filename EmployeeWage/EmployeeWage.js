@@ -3,6 +3,7 @@ const IS_FULL_TIME = 2;
 const PART_TIME_HRS = 4;
 const FULL_TIME_HRS = 8;
 const WAGE_PER_HR = 20;
+const NUMBER_OF_WORKING_DAYS = 20;
 
 function getWorkingHrs(empcheck) {
   switch (empcheck) {
@@ -14,11 +15,15 @@ function getWorkingHrs(empcheck) {
       console.log("Employee is full time");
       return FULL_TIME_HRS;
     default:
+        console.log("Employee is Absent");
       return 0;
   }
 }
-
-let empcheck = Math.floor(Math.random() * 10) % 3;
-let emphrs = getWorkingHrs(empcheck);
-let empwage = emphrs * WAGE_PER_HR;
-console.log("Empwage :" + empwage);
+let totalEmployeeHrs =0;
+for (let day =0; day<NUMBER_OF_WORKING_DAYS;day++)
+{
+    let empCheck =  Math.floor(Math.random() * 10) % 3;
+    totalEmployeeHrs += getWorkingHrs(empCheck);
+}
+let empWage = totalEmployeeHrs * WAGE_PER_HR;
+console.log("TotalWorkingHours: "+totalEmployeeHrs+", Total Employee Wage: "+empWage)
