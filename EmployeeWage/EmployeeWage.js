@@ -16,16 +16,34 @@ function getWorkingHrs(empcheck) {
       console.log("Employee is full time");
       return FULL_TIME_HRS;
     default:
-        console.log("Employee is Absent");
+      console.log("Employee is Absent");
       return 0;
   }
 }
-let totalEmployeeHrs =0;
-let totalWrkDays =0;
-while(totalEmployeeHrs<=MAX_HRS_IN_MONTH && totalWrkDays<=NUMBER_OF_WORKING_DAYS){
-    totalWrkDays++
-        let empcheck=Math.floor(Math.random()*10)%3;
-        totalEmployeeHrs += getWorkingHrs(empcheck)
-    }
-    let empwage = totalEmployeeHrs*WAGE_PER_HR;
-     console.log("Total Days :" + totalWrkDays  +    "\nTotal Hrs :" +totalEmployeeHrs +  "\nTotal Wage :" + empwage);
+
+function caldailyWage(emphrs) {
+  return emphrs * WAGE_PER_HR;
+}
+let totalEmployeeHrs = 0;
+let totalWrkDays = 0;
+let empDailyWageArr = new Array();
+
+while (
+  totalEmployeeHrs <= MAX_HRS_IN_MONTH &&
+  totalWrkDays <= NUMBER_OF_WORKING_DAYS
+) {
+  totalWrkDays++;
+  let empcheck = Math.floor(Math.random() * 10) % 3;
+  let emphrs = getWorkingHrs(empcheck);
+  totalEmployeeHrs += emphrs;
+  empDailyWageArr.push(caldailyWage(emphrs));
+}
+let empwage = caldailyWage(totalEmployeeHrs);
+console.log(
+  "Total Days: " +
+    totalWrkDays +
+    " \nTotal hrs: " +
+    totalEmployeeHrs +
+    "\nTotal Wage: " +
+    empwage
+);
