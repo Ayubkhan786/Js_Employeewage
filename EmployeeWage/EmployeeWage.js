@@ -23,6 +23,7 @@ function getWorkingHrs(empcheck) {
 function caldailyWage(emphrs) {
   return emphrs * WAGE_PER_HR;
 }
+//wrapping Everything in single Object
 let totalEmployeeHrs = 0;
 let totalWorkingDays = 0;
 let empDailyHrsAndWageArr = new Array();
@@ -51,3 +52,34 @@ while (
   });
 }
 console.log("Showing Daily Hours and Wage Earned: " + empDailyHrsAndWageArr);
+//Using Object Functions along with Arrow functions
+//Total Hours
+let totalWages = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyWage > 0)
+  .reduce(
+    (totalWage, dailyHrsAndWage) => (totalWage += dailyHrsAndWage.dailyWage),
+    0
+  );
+let totalHours = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyWage > 0)
+  .reduce(
+    (totalHour, dailyHrsAndWage) => (totalHour += dailyHrsAndWage.dailyHours),
+    0
+  );
+console.log("Total Hours: " + totalHours + " Total Wage: " + totalWages);
+//full working days
+empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours == 8)
+  .forEach((dailyHrsAndWage) =>
+    process.stdout.write(dailyHrsAndWage.toString())
+  );
+//Part time Working days strings
+let partWorkingDayStrrArr = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours === 4)
+  .map((dailyHrsAndWage) => dailyHrsAndWage.toString());
+console.log("Part time working days:" + partWorkingDayStrrArr);
+//Non working Days
+let nonWorkingDays = empDailyHrsAndWageArr
+  .filter((dailyHrsAndWage) => dailyHrsAndWage.dailyHours == 0)
+  .map((dailyHrsAndWage) => dailyHrsAndWage.dayNum);
+console.log("Non Working days" + nonWorkingDays);
