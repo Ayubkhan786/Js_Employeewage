@@ -138,3 +138,29 @@ function empDailyHrsMap(emphrs) {
 let empDailyHrs = empDailyHrsMaps.map(empDailyHrsMap);
 console.log("DailyHours map");
 console.log(empDailyHrs);
+//Using Arrow function
+const findTotal = (totalval, dailyVal) => {
+  return totalval + dailyVal;
+};
+let totalHours = Array.from(empDailyHrsMaps.values()).reduce(findTotal, 0);
+let totalSalary = empDailyWageArr
+  .filter((dailyWage) => dailyWage > 0)
+  .reduce(findTotal, 0);
+console.log(
+  "Employee Wage with Arrow: " +
+    " Total Hours: " +
+    totalHours +
+    " Total Wages: " +
+    totalSalary
+);
+let nonWorkingDays = new Array();
+let partWorkingDays = new Array();
+let fullWorkingDays = new Array();
+empDailyHrsMaps.forEach((value, key, map) => {
+  if (value === 8) fullWorkingDays.push(key);
+  else if (value === 4) partWorkingDays.push(key);
+  else nonWorkingDays.push(key);
+});
+console.log("Full working Days: " + fullWorkingDays);
+console.log("Part working Days: " + partWorkingDays);
+console.log("non Working days: " + nonWorkingDays);
