@@ -1,8 +1,7 @@
 class EmployeeePayrollData {
   id;
   salary;
-  name;
-  
+
   constructor(...params) {
     this.id = params[0];
     this.name = params[1];
@@ -21,6 +20,14 @@ class EmployeeePayrollData {
   }
   set startDate(startDate) {
     this._startDate = startDate;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(name) {
+    let nameRegex = RegExp("^[A-Z]{1}[a-z]{3,}$");
+    if (nameRegex.test(name)) this._name = name;
+    else throw "Name is incorrect";
   }
   toString() {
     const option = { year: "numeric", month: "long", day: "numeric" };
